@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip and Flow | Therapeutic Wellness Program</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --deep-purple: #0f0518;
+            --neon-purple: #b026ff;
+            --electric-purple: #7c3aed;
+            --soft-purple: #e9d5ff;
+            --hot-pink: #ff00ff;
+            --cyan: #00ffff;
+            --gold: #ffd700;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--deep-purple);
+            color: var(--soft-purple);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .psychedelic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(176, 38, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 0, 255, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, #0f0518 0%, #1a0b2e 50%, #0f0518 100%);
+            animation: bgShift 20s ease-in-out infinite;
+        }
+
+        @keyframes bgShift {
+            0%, 100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(30deg); }
+        }
+
+        .floating-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            z-index: -1;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .orb1 {
+            width: 400px;
+            height: 400px;
+            background: var(--neon-purple);
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .orb2 {
+            width: 300px;
+            height: 300px;
+            background: var(--hot-pink);
+            bottom: -50px;
+            right: -50px;
+            animation-delay: 5s;
+        }
+
+        .orb3 {
+            width: 250px;
+            height: 250px;
+            background: var(--cyan);
+            top: 50%;
+            left: 50%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        header {
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .logo-container {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3em;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            letter-spacing: -2px;
+            text-shadow: 0 0 20px rgba(176, 38, 255, 0.8);
+        }
+
+        .flip-f {
+            display: inline-block;
+            color: var(--neon-purple);
+            transform: rotate(0deg);
+            animation: flicker 3s infinite alternate;
+        }
+
+        .flip-f.upside-down {
+            transform: rotate(180deg);
+            color: var(--hot-pink);
+        }
+
+        .and-symbol {
+            font-size: 0.6em;
+            color: var(--cyan);
+            margin: 0 5px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; text-shadow: 0 0 20px currentColor; }
+            50% { opacity: 0.8; text-shadow: 0 0 40px currentColor, 0 0 60px currentColor; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .tagline {
+            font-size: 1.2em;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: var(--cyan);
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 20px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--soft-purple);
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            transition: all 0.3s;
+            padding: 5px 15px;
+            border: 1px solid transparent;
+        }
+
+        nav a:hover {
+            color: var(--gold);
+            border: 1px solid var(--neon-purple);
+            box-shadow: 0 0 20px rgba(176, 38, 255, 0.3);
+            background: rgba(176, 38, 255, 0.1);
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .psychedelic-btn {
+            padding: 20px 50px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--neon-purple), var(--hot-pink));
+            color: white;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+            box-shadow: 0 0 30px rgba(176, 38, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--cyan);
+            border: 2px solid var(--cyan);
+            clip-path: polygon(0 0, 90% 0, 100% 100%, 10% 100%);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .psychedelic-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 40px rgba(176, 38, 255, 0.6);
+        }
+
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(90deg, var(--neon-purple), var(--cyan), var(--hot-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        .about-content {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(176, 38, 255, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            line-height: 1.8;
+            font-size: 1.1em;
+        }
+
+        .about-content p {
+            margin-bottom: 20px;
+            color: var(--soft-purple);
+        }
+
+        .highlight {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .participant-selection {
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(255, 0, 255, 0.1);
+            border: 1px solid var(--hot-pink);
+            border-radius: 15px;
+        }
+
+        .participant-selection h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--hot-pink);
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .participant-selection p {
+            margin-bottom: 15px;
+            font-size: 1em;
+            line-height: 1.7;
+        }
+
+        .participant-selection p:last-child {
+            margin-bottom: 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(176, 38, 255, 0.2);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon-purple);
+            box-shadow: 0 10px 40px rgba(176, 38, 255, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--cyan);
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .calendar-container {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--neon-purple);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 0 40px rgba(176, 38, 255, 0.2);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .calendar-nav {
+            background: transparent;
+            border: 2px solid var(--neon-purple);
+            color: var(--neon-purple);
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2em;
+            transition: all 0.3s;
+        }
+
+        .calendar-nav:hover {
+            background: var(--neon-purple);
+            color: white;
+            box-shadow: 0 0 20px rgba(176, 38, 255, 0.5);
+        }
+
+        .current-month {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8em;
+            color: var(--cyan);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+
+        .weekday {
+            text-align: center;
+            padding: 15px;
+            color: var(--hot-pink);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9em;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(176, 38, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            font-size: 1.1em;
+        }
+
+        .calendar-day:hover {
+            background: rgba(176, 38, 255, 0.2);
+            border-color: var(--neon-purple);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(176, 38, 255, 0.3);
+        }
+
+        .calendar-day.available {
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+
+        .calendar-day.booked {
+            background: rgba(255, 0, 0, 0.1);
+            border-color: rgba(255, 0, 0, 0.3);
+            color: #666;
+            cursor: not-allowed;
+        }
+
+        .calendar-day.selected {
+            background: var(--neon-purple);
+            color: white;
+            box-shadow: 0 0 30px rgba(176, 38, 255, 0.6);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(176, 38, 255, 0.3);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--gold);
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.2);
+        }
+
+        .pricing-card.featured::after {
+            content: 'POPULAR';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold);
+            color: black;
+            padding: 5px 20px;
+            font-size: 0.8em;
+            font-weight: 700;
+            border-radius: 20px;
+        }
+
+        .price {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3em;
+            color: var(--gold);
+            margin: 20px 0;
+        }
+
+        .contact-section {
+            text-align: center;
+            background: rgba(176, 38, 255, 0.05);
+            border-radius: 20px;
+            padding: 60px 20px;
+            border: 1px solid rgba(176, 38, 255, 0.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a0b2e 0%, #0f0518 100%);
+            border: 2px solid var(--neon-purple);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 0 60px rgba(176, 38, 255, 0.4);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2em;
+            color: var(--hot-pink);
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--cyan);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9em;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(176, 38, 255, 0.3);
+            border-radius: 10px;
+            color: white;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1em;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(45deg, var(--neon-purple), var(--hot-pink));
+            border: none;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(176, 38, 255, 0.2);
+            margin-top: 60px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9em;
+        }
+
+        .disclaimer {
+            max-width: 800px;
+            margin: 20px auto;
+            font-size: 0.85em;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="psychedelic-bg"></div>
+    <div class="floating-orb orb1"></div>
+    <div class="floating-orb orb2"></div>
+    <div class="floating-orb orb3"></div>
+
+    <header>
+        <div class="logo-container" onclick="window.scrollTo(0,0)">
+            <div class="logo-text">
+                <span class="flip-f">F</span>
+                <span class="and-symbol">&</span>
+                <span class="flip-f upside-down">F</span>
+            </div>
+        </div>
+        <div class="tagline">Flip and Flow</div>
+        
+        <nav>
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#calendar">Book Now</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="hero-buttons">
+            <button class="psychedelic-btn btn-primary" onclick="openBookingModal()">Book Now</button>
+            <button class="psychedelic-btn btn-secondary" onclick="openGiftModal()">Gift a Flip</button>
+        </div>
+    </header>
+
+    <section id="about" class="fade-in">
+        <h2>The Creator</h2>
+        <div class="about-content">
+            <p>
+                Flip and Flow is a <span class="highlight">therapeutic wellness program</span> designed to support nervous system regulation through sensory activation, somatic practices, and deep mind-body connection. Created from my personal healing journey and professional experience as a registered counselling therapist with over <span class="highlight">ten years of clinical practice</span>.
+            </p>
+            
+            <p>
+                This program serves individuals experiencing:
+                <br>• Emotional dysregulation and overwhelm
+                <br>• Depression and anxiety symptoms
+                <br>• Self-sabotaging patterns
+                <br>• Low self-worth and imposter syndrome
+                <br>• Feeling stuck in rumination or fantasy thinking
+            </p>
+
+            <p>
+                My intent is to enhance your senses and give you an immersive experience. I want to support your ability to access your own stored trauma that may be trapped in your body and mind, holding you back from reaching your potential. I am not claiming to heal your trauma—I am here to help guide you, and I will always remind you that I offer suggestions, not directives. There are no expectations. You are in complete control of your experience.
+            </p>
+
+            <p style="color: var(--gold); font-weight: 600;">
+                Important: No psychedelic substances are provided, promoted, or required. This is a completely legal, sober therapeutic experience.
+            </p>
+
+            <div class="participant-selection">
+                <h3>Participant Selection</h3>
+                <p>
+                    <strong>Not everyone will be welcome to participate in this experience.</strong> It will be helpful to provide information regarding how you learned of this program. Understanding your intention to participate is mandatory. Discretion will be advised.
+                </p>
+                
+                <p>
+                    I am a strong advocate of the 2SLGBTQ+ community. I will not welcome bad vibes into my space.
+                </p>
+                
+                <p>
+                    I ensure a thorough ritual of cleansing the space energetically through Hindu spiritual cleansing practices between clients to ensure a fresh and neutral environment.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <h2>The 5-Hour Journey</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">👁️</div>
+                <h3>Sight</h3>
+                <p>Flashing LED lights and carefully calibrated visual frequencies to support brainwave shifts and emotional processing.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🔊</div>
+                <h3>Sound</h3>
+                <p>EDM and techno bass beats combined with frequency healing and relaxation music to entrain your nervous system.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">👃</div>
+                <h3>Scent</h3>
+                <p>Lavender-infused aromas to promote deep relaxation and nervous system regulation throughout your session.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">✋</div>
+                <h3>Touch</h3>
+                <p>Massagers, heated blankets, soft pillows, and electromagnetic therapy for complete physical comfort.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">👅</div>
+                <h3>Taste</h3>
+                <p>Peppermint essence and fresh water provided to complete the sensory immersion experience.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <h3>The Flip</h3>
+                <p>Break patterns of avoidance, overthinking, and stuckness through intentional sensory disruption that creates new neural pathways.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🌊</div>
+                <h3>The Flow</h3>
+                <p>Enter states of ease and embodied presence through breathwork, sound frequencies, color therapy, and deep nervous system regulation.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🤲</div>
+                <h3>Somatic Release</h3>
+                <p>Progressive muscle relaxation and movement practices from rested states to discharge stored tension.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="calendar">
+        <h2>Book Your Session</h2>
+        <div class="calendar-container">
+            <div class="calendar-header">
+                <button class="calendar-nav" onclick="changeMonth(-1)">◀</button>
+                <div class="current-month" id="currentMonth">February 2026</div>
+                <button class="calendar-nav" onclick="changeMonth(1)">▶</button>
+            </div>
+            
+            <div class="calendar-grid" id="calendarGrid"></div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <p style="color: var(--gold); margin-bottom: 15px;">🎉 First 20 participants: Complimentary sessions (Feb 14 - Mar 31, 2026)</p>
+                <button class="psychedelic-btn btn-primary" onclick="openBookingModal()">Book Selected Date</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing">
+        <h2>Sliding Scale Access</h2>
+        <p style="text-align: center; margin-bottom: 40px; color: var(--soft-purple);">
+            Everyone deserves access. Those with more resources support those with less.
+        </p>
+        
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3 style="color: var(--cyan); font-family: 'Orbitron', sans-serif;">Supported</h3>
+                <div class="price">$75<span>/session</span></div>
+                <p>For those experiencing financial hardship</p>
+            </div>
+            
+            <div class="pricing-card featured">
+                <h3 style="color: var(--gold); font-family: 'Orbitron', sans-serif;">Standard</h3>
+                <div class="price">$150<span>/session</span></div>
+                <p>True cost of the experience</p>
+            </div>
+            
+            <div class="pricing-card">
+                <h3 style="color: var(--neon-purple); font-family: 'Orbitron', sans-serif;">Sustaining</h3>
+                <div class="price">$300<span>/session</span></div>
+                <p>Helps fund supported spots</p>
+            </div>
+            
+            <div class="pricing-card">
+                <h3 style="color: var(--hot-pink); font-family: 'Orbitron', sans-serif;">Benefactor</h3>
+                <div class="price">$500+<span>/session</span></div>
+                <p>Significantly expands access</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <h2 style="margin-bottom: 20px;">Begin Your Journey</h2>
+        <p style="font-size: 1.2em; margin-bottom: 30px; color: var(--soft-purple);">
+            Ready to flip your patterns and flow into your potential?
+        </p>
+        
+        <a href="mailto:flipandflow2025@gmail.com" class="contact-email">flipandflow2025@gmail.com</a>
+    </section>
+
+    <footer>
+        <p style="font-family: 'Orbitron', sans-serif; color: var(--neon-purple); font-size: 1.2em; margin-bottom: 10px;">
+            FLIP AND FLOW
+        </p>
+        <p>Registered Counselling Therapist | Professional Standards | Trauma-Informed Care</p>
+        
+        <div class="disclaimer">
+            <p>
+                Flip and Flow is a wellness and personal development program utilizing breathwork, sound healing, LED color therapy, and somatic practices. 
+                This is not a substitute for medical or psychiatric treatment. We do not diagnose, treat, or provide illegal substances. 
+                All sessions are conducted with professional liability insurance and strict ethical standards. 
+                Participant safety is our highest priority. No psychedelic substances are provided, promoted, or required.
+            </p>
+        </div>
+    </footer>
+
+    <div class="modal" id="bookingModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('bookingModal')">×</button>
+            <h2 style="margin-bottom: 30px; text-align: center;">Book Your Session</h2>
+            <p style="text-align: center; color: var(--soft-purple);">Contact form coming soon. Email flipandflow2025@gmail.com to book.</p>
+        </div>
+    </div>
+
+    <div class="modal" id="giftModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal('giftModal')">×</button>
+            <h2 style="margin-bottom: 30px; text-align: center;">Gift a Session</h2>
+            <p style="text-align: center; color: var(--soft-purple);">Contact form coming soon. Email flipandflow2025@gmail.com to purchase gift certificates.</p>
+        </div>
+    </div>
+
+    <script>
+        let currentDate = new Date(2026, 1, 1);
+        let selectedDate = null;
+        const bookedDates = ['2026-02-14', '2026-02-15', '2026-02-20'];
+        const availableDays = [2, 4, 5, 6];
+
+        function renderCalendar() {
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
+                               'July', 'August', 'September', 'October', 'November', 'December'];
+            document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
+            
+            const grid = document.getElementById('calendarGrid');
+            grid.innerHTML = '';
+            
+            const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            weekdays.forEach(day => {
+                const div = document.createElement('div');
+                div.className = 'weekday';
+                div.textContent = day;
+                grid.appendChild(div);
+            });
+            
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            
+            for (let i = 0; i < firstDay; i++) {
+                const div = document.createElement('div');
+                div.className = 'calendar-day';
+                div.style.visibility = 'hidden';
+                grid.appendChild(div);
+            }
+            
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const dateObj = new Date(year, month, day);
+                const dayOfWeek = dateObj.getDay();
+                
+                const div = document.createElement('div');
+                div.className = 'calendar-day';
+                div.textContent = day;
+                
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                
+                if (dateObj < today) {
+                    div.classList.add('booked');
+                } else if (bookedDates.includes(dateStr)) {
+                    div.classList.add('booked');
+                } else if (availableDays.includes(dayOfWeek)) {
+                    div.classList.add('available');
+                    div.onclick = () => selectDate(dateStr, div);
+                }
+                
+                if (selectedDate === dateStr) {
+                    div.classList.add('selected');
+                }
+                
+                grid.appendChild(div);
+            }
+        }
+
+        function changeMonth(direction) {
+            currentDate.setMonth(currentDate.getMonth() + direction);
+            renderCalendar();
+        }
+
+        function selectDate(dateStr, element) {
+            document.querySelectorAll('.calendar-day').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedDate = dateStr;
+        }
+
+        function openBookingModal() {
+            document.getElementById('bookingModal').classList.add('active');
+        }
+
+        function openGiftModal() {
+            document.getElementById('giftModal').classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+            }
+        }
+
+        renderCalendar();
+    </script>
+</body>
+</html>
